@@ -34,7 +34,7 @@ else:
 
 
 app = dash.Dash(external_stylesheets=[dbc.themes.YETI])
-
+server = app.server
 # Define the layout for the app
 app.layout = dbc.Container([
     dbc.Card(id='card1', children=[
