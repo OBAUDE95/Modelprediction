@@ -14,8 +14,24 @@ import pickle
 columns = ['pclass', 'sex', 'age', 'sibsp', 'parch', 'fare', 'who', 'adult_male', 'embark_town', 'alone']
 
 # Load the model from the file
-with open("first_model.pkl", 'rb') as model_file:
-    loaded_model = pickle.load(model_file)
+import dash
+import dash_bootstrap_components as dbc
+import dash_core_components as dcc
+from dash import Input, Output
+import requests
+import pickle
+
+# Define the URL to your model on GitHub
+model_url = "https://github.com/OBAUDE95/Modelprediction/raw/5a79bbfe40a0a143cec8627de074940d834b2a7b/first_model.pkl"
+
+# Download the model file
+response = requests.get(model_url)
+
+if response.status_code == 200:
+    loaded_model = pickle.loads(response.content)
+else:
+    raise Exception("Failed to download the model file.")
+
 
 app = dash.Dash(external_stylesheets=[dbc.themes.YETI])
 
